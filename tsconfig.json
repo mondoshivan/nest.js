@@ -14,6 +14,12 @@
       "@cats/*": [
         "src/cats/*"
       ],
+      "@exceptions/*": [
+        "src/exceptions/*"
+      ],
+      "@filters/*": [
+        "src/filters/*"
+      ],
       "@root/*": [
         "src/*"
       ]
