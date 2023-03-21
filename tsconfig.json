@@ -11,11 +11,8 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
-      "@interfaces/*": [
-        "src/interfaces/*"
-      ],
-      "@dto/*": [
-        "src/dto/*"
+      "@cats/*": [
+        "src/cats/*"
       ],
       "@root/*": [
         "src/*"

@@ -1,4 +1,4 @@
-import { Cat } from '@interfaces/cat.interface';
+import { Cat } from '@cats/interfaces/cat.interface';
 
 /**
  * A DTO is an object that defines how the data will be sent over the network.
@@ -11,7 +11,7 @@ import { Cat } from '@interfaces/cat.interface';
  * This is important because features such as Pipes enable additional possibilities
  * when they have access to the metatype of the variable at runtime.
  */
-export class SendCatDTO implements Cat {
+export class CreateCatDto implements Cat {
   name: string;
   age: number;
   breed: string;
