@@ -61,11 +61,11 @@ export class CatsController {
    *   await app.listen(3000);
    * }
    * bootstrap();
-   * 
-   * As a reminder, you don't have to build a generic validation pipe on your own 
-   * since the ValidationPipe is provided by Nest out-of-the-box. 
-   * The built-in ValidationPipe offers more options than the sample we built in this chapter, 
-   * which has been kept basic for the sake of illustrating the mechanics of a custom-built pipe. 
+   *
+   * As a reminder, you don't have to build a generic validation pipe on your own
+   * since the ValidationPipe is provided by Nest out-of-the-box.
+   * The built-in ValidationPipe offers more options than the sample we built in this chapter,
+   * which has been kept basic for the sake of illustrating the mechanics of a custom-built pipe.
    * You can find full details, along with lots of examples here:
    * https://docs.nestjs.com/techniques/validation
    *
