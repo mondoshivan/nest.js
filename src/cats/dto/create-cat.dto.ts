@@ -1,4 +1,5 @@
 import { Cat } from '@cats/interfaces/cat.interface';
+import { IsString, IsInt } from 'class-validator';
 
 /**
  * A DTO is an object that defines how the data will be sent over the network.
@@ -12,7 +13,12 @@ import { Cat } from '@cats/interfaces/cat.interface';
  * when they have access to the metatype of the variable at runtime.
  */
 export class CreateCatDto implements Cat {
+  @IsString()
   name: string;
+
+  @IsInt()
   age: number;
+
+  @IsString()
   breed: string;
 }

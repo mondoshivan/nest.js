@@ -20,6 +20,9 @@
       "@filters/*": [
         "src/filters/*"
       ],
+      "@pipes/*": [
+        "src/pipes/*"
+      ],
       "@root/*": [
         "src/*"
       ]

@@ -19,6 +19,7 @@ export class AppController {
   }
 
   /**
+   * Pipes
    * To use a pipe, we need to bind an instance of the pipe class to the appropriate context.
    * In our ParseIntPipe example, we want to associate the pipe with a particular route handler method,
    * and make sure it runs before the method is called.
@@ -38,6 +39,18 @@ export class AppController {
        id: number,
      )
    *
+   * All Parse* pipes work in the context of validating route parameters, query string parameters and request body values.
+   * 
+   * Available pipes:
+   * - ValidationPipe
+   * - ParseIntPipe
+   * - ParseFloatPipe
+   * - ParseBoolPipe
+   * - ParseArrayPipe
+   * - ParseUUIDPipe
+   * - ParseEnumPipe
+   * - DefaultValuePipe
+   * - ParseFilePipe
    * @param id
    * @returns
    */
@@ -47,6 +60,9 @@ export class AppController {
   }
 
   /**
+   * Exception Filters
+   * Binding custom Filter to route method.
+   *
    * We have used the @UseFilters() decorator here.
    * Similar to the @Catch() decorator, it can take a single filter instance, or a comma-separated list of filter instances.
    * Here, we created the instance of HttpExceptionFilter in place.
