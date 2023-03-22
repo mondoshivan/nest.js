@@ -1,10 +1,40 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  UseGuards,
+  SetMetadata,
+} from '@nestjs/common';
 import { CreateCatDto } from '@cats/dto/create-cat.dto';
 import { CatsService } from '@cats/cats.service';
 import { Cat } from '@cats/interfaces/cat.interface';
 import { CustomValidationPipe } from '@pipes/custom-validation.pipe';
+import { RolesGuard } from '@guards/roles.guard';
+import { Roles } from '@decorators/roles.decorator';
 
+/**
+ * Binding guards
+ * Below, we set up a controller-scoped guard using the @UseGuards() decorator.
+ * This decorator may take a single argument, or a comma-separated list of arguments.
+ * This lets you easily apply the appropriate set of guards with one declaration.
+ *
+ * We passed the RolesGuard class (instead of an instance),
+ * leaving responsibility for instantiation to the framework and enabling dependency injection.
+ * As with pipes and exception filters, we can also pass an in-place instance.
+ *
+ * The CatsController could have different permission schemes for different routes.
+ * Some might be available only for an admin user, and others could be open for everyone.
+ * How can we match roles to routes in a flexible and reusable way?
+ *
+ * This is where custom metadata comes into play
+ * (learn more here: https://docs.nestjs.com/fundamentals/execution-context#reflection-and-metadata).
+ * Nest provides the ability to attach custom metadata to route handlers through the @SetMetadata() decorator.
+ * This metadata supplies our missing role data, which a smart guard needs to make decisions.
+ * --> Switch to route method createWithGuard() below!
+ */
 @Controller('cats')
+@UseGuards(RolesGuard)
 export class CatsController {
   /**
    * In Nest, thanks to TypeScript capabilities, it's extremely easy to manage dependencies
@@ -15,6 +45,39 @@ export class CatsController {
    * @param catsService
    */
   constructor(private catsService: CatsService) {}
+
+  /**
+   * With this construction, we attached the roles metadata
+   * (roles is a key, while ['admin'] is a particular value) to the create() method.
+   * While this works, it's not good practice to use @SetMetadata() directly in your routes.
+   * Instead, create your own decorators -> roles.decorators.ts
+   * Proceed --> route method createWithGuardAndCustomRole()
+   * @param createCatDto
+   */
+  @Post()
+  @SetMetadata('roles', ['admin'])
+  async createWithGuard(@Body() createCatDto: CreateCatDto) {
+    this.catsService.create(createCatDto);
+  }
+
+  /**
+   * This approach is much cleaner and more readable, and is strongly typed.
+   * Now that we have a custom @Roles() decorator, we can use it to decorate the create() method.
+   *
+   * When a user with insufficient privileges requests an endpoint,
+   * Nest automatically returns the following response:
+   * {
+   *   "statusCode": 403,
+   *   "message": "Forbidden resource",
+   *   "error": "Forbidden"
+   * }
+   * @param createCatDto
+   */
+  @Post()
+  @Roles('admin')
+  async createWithGuardAndCustomRole(@Body() createCatDto: CreateCatDto) {
+    this.catsService.create(createCatDto);
+  }
 
   /**
    * Custo Pipe with Class Validator

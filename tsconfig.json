@@ -14,11 +14,17 @@
       "@cats/*": [
         "src/cats/*"
       ],
+      "@decorators/*": [
+        "src/decorators/*"
+      ],
       "@exceptions/*": [
         "src/exceptions/*"
       ],
       "@filters/*": [
         "src/filters/*"
+      ],
+      "@guards/*": [
+        "src/guards/*"
       ],
       "@pipes/*": [
         "src/pipes/*"
