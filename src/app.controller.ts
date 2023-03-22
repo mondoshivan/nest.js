@@ -4,12 +4,27 @@ import {
   Param,
   ParseIntPipe,
   UseFilters,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CustomForbiddenException } from '@exceptions/forbidden.exception';
 import { HttpExceptionFilter } from '@filters/http-exception.filter';
 import { CatsService } from '@cats/cats.service';
+import { LoggingInterceptor } from '@interceptors/logging.interceptor';
 
+/**
+ * Binding interceptors
+ * In order to set up the interceptor, we use the @UseInterceptors() decorator imported from the @nestjs/common package.
+ * Like pipes and guards, interceptors can be controller-scoped, method-scoped, or global-scoped.
+ * Using the below construction, each route handler defined in Controller will use LoggingInterceptor.
+ *
+ * Note that we passed the LoggingInterceptor type (instead of an instance),
+ * leaving responsibility for instantiation to the framework and enabling dependency injection.
+ * As with pipes, guards, and exception filters, we can also pass an in-place instance.
+ *
+ * If we want to restrict the interceptor's scope to a single method, we simply apply the decorator at the method level.
+ */
 @Controller()
+@UseInterceptors(LoggingInterceptor)
 export class AppController {
   constructor(private catsService: CatsService) {}
 
