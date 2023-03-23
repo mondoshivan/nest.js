@@ -26,6 +26,22 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+NestJS is an interesting NodeJS framework that has many similarities to Angular and provides the Angular concepts for server development in the backend.
+
+This repository contains rudimentary implementations of the most important Nest concepts: 
+- Modules
+- Controllers
+- Services
+- Exception Filters
+- Middleware
+- Pipes
+- Guards
+- Interceptors
+- Custom Decorators
+- Data Transfer Objects (DTO)
+
+A lot of value was placed on detailed code documentation (mainly taken from the [Nest Homepge](https://github.com/nestjs/nest)), which should make it easier to get started and implement real projects.
+
 ## Installation
 
 ```bash
